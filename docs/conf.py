@@ -6,7 +6,7 @@ import datetime
 ### Project Information ###########################################################################
 ###################################################################################################
 
-project = 'pblcia'
+project = 'pb-aesa'
 author = 'LTT @ RWTH Aachen University'
 copyright = datetime.date.today().strftime("%Y") + ' LTT @ RWTH Aachen University'
 version: str = 'latest' # required by the version switcher
@@ -45,7 +45,7 @@ extensions = [
     "sphinx_copybutton",
 ]
 
-autoapi_dirs = ['../pblcia']
+autoapi_dirs = ['../pb-aesa']
 autoapi_type = 'python'
 autoapi_ignore = [
     '*/data/*',
@@ -131,12 +131,12 @@ html_theme_options = {
     "icon_links": [
         {
             "name": "GitHub",
-            "url": "https://github.com/RWTH-LTT/pblcia",
+            "url": "https://github.com/RWTH-LTT/pb-aesa",
             "icon": "fab fa-brands fa-github",
         },
         # {
         #     "name": "Conda",
-        #     "url": "https://anaconda.org/diepers/pblcia",
+        #     "url": "https://anaconda.org/diepers/pb-aesa",
         #     "icon": "fa-brands fa-python",
         #     "type": "fontawesome",
         # },
@@ -147,7 +147,7 @@ html_theme_options = {
     "use_edit_page_button": True,
     "navigation_with_keys": True,
     "logo": {
-        "text": "pblcia",
+        "text": "pb-aesa",
         "image_light": "https://raw.githubusercontent.com/brightway-lca/brightway-documentation/main/source/_static/logo/BW_all_black_transparent_landscape.svg",
         "image_dark": "https://raw.githubusercontent.com/brightway-lca/brightway-documentation/main/source/_static/logo/BW_all_white_transparent_landscape.svg"
     },
@@ -156,7 +156,7 @@ html_theme_options = {
 # required by html_theme_options: "use_edit_page_button"
 html_context = {
     "github_user": "RWTH-LTT",
-    "github_repo": "pblcia",
+    "github_repo": "pb-aesa",
     "github_version": "main",
     "doc_path": "docs",
 }

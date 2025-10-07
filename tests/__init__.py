@@ -1,1 +1,1 @@
-"""Test suite for the pblcia package."""
+"""Test suite for the pb-aesa package."""

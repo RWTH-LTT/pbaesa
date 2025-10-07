@@ -3,14 +3,14 @@ requires = ["setuptools>=68.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "pblcia"
+name = "pb-aesa"
 authors = [
   { name="Jan Hartmann", email="jan.hartmann@ltt.rwth-aachen.de" }
 ]
 maintainers = [
   { name="Jan Hartmann", email="jan.hartmann@ltt.rwth-aachen.de" }
 ]
-description = "Planetary-boundary-based life cycle impact assessment"
+description = "Planetary-boundary-based absolute environmental sustainability assessment"
 readme = "README.md"
 dynamic = ["version"]
 # Add here all kinds of additional classifiers as defined under
@@ -34,15 +34,15 @@ dependencies = [
 ]
 
 [project.urls]
-source = "https://github.com/RWTH-LTT/pblcia"
-homepage = "https://github.com/RWTH-LTT/pblcia"
-tracker = "https://github.com/RWTH-LTT/pblcia/issues"
+source = "https://github.com/RWTH-LTT/pb-aesa"
+homepage = "https://github.com/RWTH-LTT/pb-aesa"
+tracker = "https://github.com/RWTH-LTT/pb-aesa/issues"
 
 [project.optional-dependencies]
 # Getting recursive dependencies to work is a pain, this
 # seems to work, at least for now
 testing = [
-    "pblcia",
+    "pb-aesa",
     "pytest",
     "pytest-cov",
     "python-coveralls"
@@ -60,13 +60,13 @@ dev = [
 [tool.setuptools]
 license-files = ["LICENSE"]
 include-package-data = true
-packages = ["pblcia"]
+packages = ["pb-aesa"]
 
 [tool.setuptools.dynamic]
-version = {attr = "pblcia.__version__"}
+version = {attr = "pb-aesa.__version__"}
 
 [tool.pytest.ini_options]
-addopts = "--cov pblcia --cov-report term-missing --verbose"
+addopts = "--cov pb-aesa --cov-report term-missing --verbose"
 norecursedirs = [
     "dist",
     "build",

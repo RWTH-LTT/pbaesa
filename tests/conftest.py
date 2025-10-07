@@ -1,3 +1,3 @@
-"""Fixtures for pblcia"""
+"""Fixtures for pb-aesa"""
 
 # import pytest
