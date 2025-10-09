@@ -17,6 +17,8 @@ from .methods import (
 from .nitrogen import (
     create_n_supply_flow,
     add_n_supply_flow_to_foreground_system,
+    add_n_supply_flow_to_databases,
+    add_n_supply_flow,
 )
 
 # Allocation factors
@@ -59,6 +61,8 @@ __all__ = (
     # Nitrogen
     "create_n_supply_flow",
     "add_n_supply_flow_to_foreground_system",
+    "add_n_supply_flow_to_databases",
+    "add_n_supply_flow",
     # Allocation
     "get_all_allocation_factor",
     "get_direct_FCE_allocation_factor",
