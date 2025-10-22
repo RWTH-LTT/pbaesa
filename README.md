@@ -27,6 +27,41 @@ You can install _pb-aesa_ via [pip] from [PyPI]:
 $ pip install pb-aesa
 ```
 
+## Usage
+
+### Basic Example
+
+```python
+import bw2data as bd
+import pb_aesa
+
+# Set your Brightway project
+bd.projects.set_current('your_project_name')
+
+# Load your biosphere database
+bio = bd.Database("ecoinvent-3.10.1-biosphere")
+
+# Create all planetary boundary LCIA methods
+pb_aesa.create_pbaesa_methods(biosphere_db=bio)
+
+# Get allocation factors for a specific sector and location
+allocation_factors = pb_aesa.get_all_allocation_factor(
+    geographical_scope="DE",  # Germany
+    sector="Cultivation of wheat",
+    year=2022
+)
+
+print(allocation_factors)
+```
+
+### Key Functions
+
+- **`create_pbaesa_methods(biosphere_db, process_ids=[])`**: Creates and registers LCIA methods for all global planetary boundary categories (climate change, ocean acidification, biosphere integrity, phosphorus cycle, atmospheric aerosol loading, freshwater use, stratospheric ozone depletion, land-system change, and nitrogen cycle).
+
+- **`get_all_allocation_factor(geographical_scope, sector, year)`**: Retrieves allocation factors for a specific sector and geographical scope. If the allocation factors file is not present, the function will attempt to generate it automatically.
+
+For more detailed examples, see the `examples/` directory.
+
 ## Contributing
 
 Contributions are very welcome.
