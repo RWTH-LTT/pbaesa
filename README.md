@@ -27,6 +27,49 @@ You can install _pb-aesa_ via [pip] from [PyPI]:
 $ pip install pb-aesa
 ```
 
+## Usage
+
+Here's a simple example of how to use pb-aesa for planetary boundary-based absolute environmental sustainability assessment:
+
+```python
+import bw2data as bd
+import bw2calc as bc
+import pb_aesa
+
+# 1. Set up your Brightway project and load databases
+bd.projects.set_current('your_project_name')
+bio = bd.Database("ecoinvent-3.10.1-biosphere")
+ei = bd.Database("ecoinvent-3.10.1-cutoff")
+
+# 2. Create planetary boundary LCIA methods
+pb_aesa.create_pbaesa_methods(bio)
+
+# 3. Get allocation factors for a specific sector
+allocation_factors = pb_aesa.get_all_allocation_factor(
+    geographical_scope="DE",
+    sector="Cultivation of wheat", 
+    year=2022
+)
+
+# 4. Run your LCA assessment
+methods = [m for m in bd.methods if "Planetary Boundaries" in str(m)]
+activity = [act for act in ei if 'wheat grain production' in act['name']][0]
+
+functional_unit = {activity: 1.0}
+mlca = bc.MultiLCA(
+    demands=functional_unit,
+    method_config={"impact_categories": methods}
+)
+mlca.lci()
+mlca.lcia()
+
+# 5. Calculate and visualize exploitation of Safe Operating Space
+exploitation = pb_aesa.calculate_exploitation_of_SOS(mlca.scores)
+pb_aesa.plot_exploitation_of_SOS(exploitation)
+```
+
+For more detailed examples, see the [examples](examples/) directory.
+
 ## Contributing
 
 Contributions are very welcome.

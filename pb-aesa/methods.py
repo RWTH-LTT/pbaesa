@@ -128,12 +128,13 @@ def create_n_cycle_method(biosphere_db, process_ids=None):
     return None
 
 
-def implement_lcia_methods(biosphere_db, process_ids=None):
+def create_pbaesa_methods(biosphere_db, process_ids=None):
     """
-    Implements all LCIA methods for planetary boundaries.
+    Creates and registers LCIA methods for all global planetary boundary categories.
     
-    This is a convenience function that creates both standard methods and 
-    the nitrogen cycle method.
+    This is the main user-facing function to set up all planetary boundary LCIA 
+    methods except novel entities. It creates both standard methods (climate change,
+    ocean acidification, etc.) and the nitrogen cycle method.
 
     Args:
         biosphere_db: Biosphere database from ecoinvent.
@@ -150,3 +151,21 @@ def implement_lcia_methods(biosphere_db, process_ids=None):
     create_normal_methods(biosphere_db)
 
     return None
+
+
+def implement_lcia_methods(biosphere_db, process_ids=None):
+    """
+    Implements all LCIA methods for planetary boundaries.
+    
+    This is a convenience function that creates both standard methods and 
+    the nitrogen cycle method. Alias for create_pbaesa_methods.
+
+    Args:
+        biosphere_db: Biosphere database from ecoinvent.
+        process_ids (list, optional): List of process IDs for agricultural activities 
+                                     (used for nitrogen cycle). Defaults to None.
+        
+    Returns:
+        None: LCIA methods are implemented.
+    """
+    return create_pbaesa_methods(biosphere_db, process_ids=process_ids)

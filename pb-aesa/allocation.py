@@ -9,6 +9,9 @@ def get_all_allocation_factor(geographical_scope, sector, year):
     """
     Retrieves all allocation factors for a specific geographical scope and sector.
     
+    If allocation factors are not found for the specified year, they will be
+    automatically calculated and exported using export_all_allocation_factors.
+    
     Args:
         geographical_scope (str): Geographical scope (country code or region).
         sector (str): Sector name (following EU's NACE Rev.1 classification).
@@ -22,6 +25,17 @@ def get_all_allocation_factor(geographical_scope, sector, year):
     pattern = os.path.join(directory, f'*_{year}.xlsx')
     matching_file = glob.glob(pattern)
   
+    if not matching_file:
+        print(f"Allocation factors for {year} not found. Calculating and exporting...")
+        # Import here to avoid circular imports
+        from .exiobase import export_all_allocation_factors
+        try:
+            export_all_allocation_factors(year)
+            matching_file = glob.glob(pattern)
+        except Exception as e:
+            print(f"Error calculating allocation factors: {e}")
+            return None
+    
     if matching_file:
         file_path_allocation_factors = matching_file[0]
         allocation_factor_df = pd.read_excel(file_path_allocation_factors)
@@ -46,7 +60,7 @@ def get_all_allocation_factor(geographical_scope, sector, year):
 
         return filtered_df
     else:
-        print("Calculation of allocation factors necessary!")
+        print("Unable to calculate allocation factors.")
         return None
 
 

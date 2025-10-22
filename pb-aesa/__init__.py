@@ -10,6 +10,7 @@ from .visualization import plot_exploitation_of_SOS
 from .methods import (
     create_normal_methods,
     create_n_cycle_method,
+    create_pbaesa_methods,
     implement_lcia_methods,
 )
 
@@ -36,6 +37,7 @@ from .exiobase import (
     load_matrices,
     calculate_FR_matrix,
     calculate_direct_FCE_allocation_factors,
+    export_all_allocation_factors,
 )
 
 # Constants
@@ -57,6 +59,7 @@ __all__ = (
     # Methods
     "create_normal_methods",
     "create_n_cycle_method",
+    "create_pbaesa_methods",
     "implement_lcia_methods",
     # Nitrogen
     "create_n_supply_flow",
@@ -74,6 +77,7 @@ __all__ = (
     "load_matrices",
     "calculate_FR_matrix",
     "calculate_direct_FCE_allocation_factors",
+    "export_all_allocation_factors",
     # Constants
     "SAFE_OPERATING_SPACE",
     "PLANETARY_BOUNDARY_UNITS",
