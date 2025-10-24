@@ -36,9 +36,9 @@ dependencies = [
 ]
 
 [project.urls]
-source = "https://github.com/RWTH-LTT/pb-aesa"
-homepage = "https://github.com/RWTH-LTT/pb-aesa"
-tracker = "https://github.com/RWTH-LTT/pb-aesa/issues"
+source = "https://github.com/RWTH-LTT/pbaesa"
+homepage = "https://github.com/RWTH-LTT/pbaesa"
+tracker = "https://github.com/RWTH-LTT/pbaesa/issues"
 
 [project.optional-dependencies]
 # Getting recursive dependencies to work is a pain, this

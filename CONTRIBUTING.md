@@ -11,9 +11,9 @@ Here is a list of important resources for contributors:
 - [Code of Conduct](CODE_OF_CONDUCT)
 
 [License]: https://opensource.org/licenses/MIT  
-[Source Code]: https://github.com/RWTH-LTT/pb-aesa  
+[Source Code]: https://github.com/RWTH-LTT/pbaesa  
 [Documentation]: https://pbaesa.readthedocs.io/  
-[Issue Tracker]: https://github.com/RWTH-LTT/pb-aesa/issues  
+[Issue Tracker]: https://github.com/RWTH-LTT/pbaesa/issues  
 
 
 ## How to report a bug
