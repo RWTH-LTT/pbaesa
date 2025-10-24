@@ -8,16 +8,12 @@
 [![PyPI](https://img.shields.io/pypi/v/pbaesa.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/pbaesa.svg)][pypi status]
 [![Python Version](https://img.shields.io/pypi/pyversions/pbaesa)][pypi status]
-[![License](https://img.shields.io/pypi/l/pbaesa)][license]
-[![Read the documentation at https://pbaesa.readthedocs.io/](https://img.shields.io/readthedocs/pbaesa/latest.svg?label=Read%20the%20Docs)][read the docs]
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
 [pypi status]: https://pypi.org/project/pbaesa/
-[read the docs]: https://pbaesa.readthedocs.io/
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
-[license]: LICENSE
 
 
 pbaesa is a python package for planetary-boundary-based absolute environmental sustainability assessment of anthropogenic systems.
