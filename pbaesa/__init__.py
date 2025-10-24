@@ -5,7 +5,7 @@ This package provides tools for implementing and using planetary boundary-based
 LCIA methods in Brightway LCA framework.
 """
 
-__version__ = "0.1.0"
+__version__ = "0.1.1"
 
 from .lcia import create_pbaesa_methods
 from .allocation import get_all_allocation_factor
