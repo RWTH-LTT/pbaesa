@@ -33,6 +33,7 @@ dependencies = [
     "openpyxl>=3.0.0",
     "bw2data>=4.0.0",
     "bw2calc>=2.0.0",
+    "pymrio",
 ]
 
 [project.urls]
