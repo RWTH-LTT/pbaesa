@@ -62,7 +62,9 @@ dev = [
 
 [tool.setuptools]
 license-files = ["LICENSE"]
+package-dir = { "" = "."}
 include-package-data = true
+package-data = { "pbaesa" = ["data/*.xlsx"] }
 packages = ["pbaesa", "pbaesa.data"]
 
 [tool.setuptools.dynamic]
