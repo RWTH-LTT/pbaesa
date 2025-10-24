@@ -1,4 +1,4 @@
-# `pbaesa` Changelog
+# `pb-aesa` Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -7,10 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [0.1.0] - 2022-03-22
+## [0.1.0] - 2025-10-24
 
-### Added
-
-### Changed
-
-### Removed
+* Initial release

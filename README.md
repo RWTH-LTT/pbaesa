@@ -1,4 +1,9 @@
-# pbaesa
+<h1>
+  <img src="docs\_static\AESA_icon.svg" width="70" style="vertical-align: middle;" />
+  pb-aesa
+</h1>
+
+
 
 [![PyPI](https://img.shields.io/pypi/v/pbaesa.svg)][pypi status]
 [![Status](https://img.shields.io/pypi/status/pbaesa.svg)][pypi status]
@@ -19,21 +24,41 @@
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
 
-## Installation
+PB-AESA is a python package for planetary-boundary-based absolute environmental sustainability assessment of anthropogenic systems.
+
+## 🌍 Features
+
+PB-AESA enables:
+
+1) The assessment of system-specific impacts on all global planetary boundary categories except novel entities by integration new life cycle impact assessment methods into the [Brightway LCA framework](https://docs.brightway.dev/en/latest).
+2) The calculation of system-specific sustainability thresholds from time-explicit multi-regional input-output tables.
+
+<br>
+
+<h1>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="docs/_static/AESA.svg" height="50">
+    <img alt="bw_timex logo" src="docs/_static/AESA.svg">
+  </picture>
+</h1>
+
+
+## ⚙️ Installation
 
 You can install _pbaesa_ via [pip] from [PyPI]:
 
 ```console
-$ pip install pbaesa
+$ pip install pb-aesa
 ```
 
-## Usage
+## 🚀 Usage
 
 ### Basic Example
 
 ```python
 import bw2data as bd
 import pbaesa
+from pbaesa import utils
 
 # Set your Brightway project
 bd.projects.set_current('your_project_name')
@@ -51,7 +76,14 @@ allocation_factors = pbaesa.get_all_allocation_factor(
     year=2022
 )
 
-print(allocation_factors)
+# Calculate a multi-LCA using Brightway to obtain mlca_scores
+
+# Calculate exploitation of global safe operating space 
+utils.calculate_exploitation_of_SOS(mlca_scores)
+
+# Plot exploitation of global safe operating space against allocation factors
+utils.plot_AESA(exploitations, allocation_factor_total_FCE, allocation_factor_total_GVA)
+
 ```
 
 ### Key Functions
@@ -60,58 +92,30 @@ print(allocation_factors)
 
 - **`get_all_allocation_factor(geographical_scope, sector, year)`**: Retrieves allocation factors for a specific sector and geographical scope. If the allocation factors file is not present, the function will generate it automatically.
 
-For more detailed examples, see the `examples/` directory.
+For a more detailed example, see the `examples/` directory.
 
-## Contributing
+## 🤝 Contributing
 
-Contributions are very welcome.
-To learn more, see the [Contributor Guide][Contributor Guide].
+We welcome contributions! If you have suggestions or want to fix a bug, please:
+- [Open an Issue](https://github.com/RWTH-LTT/pb-aesa/issues)
+- [Send a Pull Request](https://github.com/RWTH-LTT/pb-aesa/pulls)
 
-## License and Data Use
+## 🧾 License and Data Notice
 
-## License and Attribution
+This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
 
-This repository is released under the same non-commercial license as EXIOBASE v3.9, 
-a customized derivative of the [CC BY-NC-SA 4.0 License](https://creativecommons.org/licenses/by-nc-sa/4.0/).
+© 2025 Institute of Technical Thermodynamics, RWTH Aachen University
 
-© 2025 Institute of Technical Thermodynamics  
-Uses data from EXIOBASE v3.9 © 2024 EXIOBASE Consortium, released under non-commercial license terms.  
-See [https://exiobase.eu](https://exiobase.eu) for full details.
+This repository does **not** include any EXIOBASE 3 data or derived coefficients.  
+Users must obtain EXIOBASE data directly from the official EXIOBASE source.  
+Please ensure you comply with the EXIOBASE license terms when using their data.
 
-This repository does **not** include any EXIOBASE data or derived coefficients.
-Users must obtain EXIOBASE data directly from the official source.
-Commercial use of this repository or derived works is not permitted.
+> **Note:** This code is released under the MIT License.  
+> The MIT License allows both commercial and non-commercial use of the **code**,  
+> but EXIOBASE data may have its own separate restrictions.
 
-## Issues
+## 💬 Support
 
-If you encounter any problems,
-please [file an issue][Issue Tracker] along with a detailed description.
+If you have any questions or need help, do not hesitate to contact me:
 
-
-<!-- github-only -->
-
-[command-line reference]: https://pbaesa.readthedocs.io/en/latest/usage.html
-[License]: https://github.com/RWTH-LTT/pbaesa/blob/main/LICENSE
-[Contributor Guide]: https://github.com/RWTH-LTT/pbaesa/blob/main/CONTRIBUTING.md
-[Issue Tracker]: https://github.com/RWTH-LTT/pbaesa/issues
-
-
-## Building the Documentation
-
-You can build the documentation locally by installing the documentation Conda environment:
-
-```bash
-conda env create -f docs/environment.yml
-```
-
-activating the environment
-
-```bash
-conda activate sphinx_pbaesa
-```
-
-and [running the build command](https://www.sphinx-doc.org/en/master/man/sphinx-build.html#sphinx-build):
-
-```bash
-sphinx-build docs _build/html --builder=html --jobs=auto --write-all; open _build/html/index.html
-```
+- Jan Hartmann (jan.hartmann@ltt.rwth-aachen.de)

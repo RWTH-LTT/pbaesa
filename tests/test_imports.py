@@ -29,8 +29,8 @@ def test_main_functions_available():
 
 def test_methods_module_import():
     """Test that the methods module can be imported."""
-    from pbaesa import methods
-    assert methods is not None
+    from pbaesa import lcia
+    assert lcia is not None
 
 
 def test_allocation_module_import():

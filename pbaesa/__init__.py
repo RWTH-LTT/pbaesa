@@ -7,7 +7,7 @@ LCIA methods in Brightway LCA framework.
 
 __version__ = "0.1.0"
 
-from .methods import create_pbaesa_methods
+from .lcia import create_pbaesa_methods
 from .allocation import get_all_allocation_factor
 
 __all__ = [

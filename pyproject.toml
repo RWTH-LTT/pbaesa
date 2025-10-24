@@ -10,7 +10,7 @@ authors = [
 maintainers = [
   { name="Jan Hartmann", email="jan.hartmann@ltt.rwth-aachen.de" }
 ]
-description = "Planetary-boundary-based absolute environmental sustainability assessment"
+description = "Planetary-boundary-based Absolute Environmental Sustainability Assessment"
 readme = "README.md"
 dynamic = ["version"]
 # Add here all kinds of additional classifiers as defined under
@@ -36,9 +36,9 @@ dependencies = [
 ]
 
 [project.urls]
-source = "https://github.com/RWTH-LTT/pbaesa"
-homepage = "https://github.com/RWTH-LTT/pbaesa"
-tracker = "https://github.com/RWTH-LTT/pbaesa/issues"
+source = "https://github.com/RWTH-LTT/pb-aesa"
+homepage = "https://github.com/RWTH-LTT/pb-aesa"
+tracker = "https://github.com/RWTH-LTT/pb-aesa/issues"
 
 [project.optional-dependencies]
 # Getting recursive dependencies to work is a pain, this

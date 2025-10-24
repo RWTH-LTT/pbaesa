@@ -1,20 +1,20 @@
 # Contributor Guide
 
-Thank you for your interest in improving this project.
-This project is open-source under the [BSD 3 Clause][License] and
-welcomes contributions in the form of bug reports, feature requests, and pull requests.
+Thank you for your interest in improving this project.  
+This project is open-source under the [MIT License][License] and welcomes contributions in the form of bug reports, feature requests, and pull requests.
 
 Here is a list of important resources for contributors:
 
-- [Source Code][Source Code]
-- [Documentation][Documentation]
-- [Issue Tracker][Issue Tracker]
-- [Code of Conduct][Code of Conduct]
+- [Source Code][Source Code]  
+- [Documentation][Documentation]  
+- [Issue Tracker][Issue Tracker]  
+- [Code of Conduct](CODE_OF_CONDUCT)
 
-[License]: https://opensource.org/licenses/BSD-3-Clause
-[Source Code]: https://github.com/RWTH-LTT/pbaesa
-[Documentation]: https://pbaesa.readthedocs.io/
-[Issue Tracker]: https://github.com/RWTH-LTT/pbaesa/issues
+[License]: https://opensource.org/licenses/MIT  
+[Source Code]: https://github.com/RWTH-LTT/pb-aesa  
+[Documentation]: https://pbaesa.readthedocs.io/  
+[Issue Tracker]: https://github.com/RWTH-LTT/pb-aesa/issues  
+
 
 ## How to report a bug
 
