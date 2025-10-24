@@ -1,28 +1,24 @@
 <h1>
-  <img src="docs\_static\AESA_icon.svg" width="70" style="vertical-align: middle;" />
+  <img src="docs/_static/AESA_icon.svg" width="70" style="vertical-align: middle;" />
   pb-aesa
 </h1>
 
 
 
-[![PyPI](https://img.shields.io/pypi/v/pbaesa.svg)][pypi status]
-[![Status](https://img.shields.io/pypi/status/pbaesa.svg)][pypi status]
-[![Python Version](https://img.shields.io/pypi/pyversions/pbaesa)][pypi status]
-[![License](https://img.shields.io/pypi/l/pbaesa)][license]
-
+[![PyPI](https://img.shields.io/pypi/v/pb-aesa.svg)][pypi status]
+[![Status](https://img.shields.io/pypi/status/pb-aesa.svg)][pypi status]
+[![Python Version](https://img.shields.io/pypi/pyversions/pb-aesa)][pypi status]
+[![License](https://img.shields.io/pypi/l/pb-aesa)][license]
 [![Read the documentation at https://pbaesa.readthedocs.io/](https://img.shields.io/readthedocs/pbaesa/latest.svg?label=Read%20the%20Docs)][read the docs]
-[![Tests](https://github.com/RWTH-LTT/pbaesa/actions/workflows/python-test.yml/badge.svg)][tests]
-[![Codecov](https://codecov.io/gh/RWTH-LTT/pbaesa/branch/main/graph/badge.svg)][codecov]
-
 [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)][pre-commit]
 [![Black](https://img.shields.io/badge/code%20style-black-000000.svg)][black]
 
-[pypi status]: https://pypi.org/project/pbaesa/
+[pypi status]: https://pypi.org/project/pb-aesa/
 [read the docs]: https://pbaesa.readthedocs.io/
-[tests]: https://github.com/RWTH-LTT/pbaesa/actions?workflow=Tests
-[codecov]: https://app.codecov.io/gh/RWTH-LTT/pbaesa
 [pre-commit]: https://github.com/pre-commit/pre-commit
 [black]: https://github.com/psf/black
+[license]: LICENSE
+
 
 PB-AESA is a python package for planetary-boundary-based absolute environmental sustainability assessment of anthropogenic systems.
 
@@ -35,17 +31,22 @@ PB-AESA enables:
 
 <br>
 
-<h1>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="docs/_static/AESA.svg" height="50">
-    <img alt="bw_timex logo" src="docs/_static/AESA.svg">
+<div style="margin: 0;">
+  <picture style="display: block; width: 100vw;">
+    <source media="(prefers-color-scheme: dark)" srcset="docs/_static/AESA.svg">
+    <img 
+      alt="AESA method" 
+      src="docs/_static/AESA.svg" 
+      style="width: 100vw; height: auto; display: block;"
+    >
   </picture>
-</h1>
+</div>
+
 
 
 ## ⚙️ Installation
 
-You can install _pbaesa_ via [pip] from [PyPI]:
+You can install _pb-aesa_ via [pip] from [PyPI]:
 
 ```console
 $ pip install pb-aesa
