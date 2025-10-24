@@ -11,7 +11,7 @@ import pymrio as p
 from pathlib import Path
 
 
-def get_direct_FCE_allocation_factor(geographical_scope, sector, year):
+def get_direct_FCE_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=None):
     """
     Get allocation factors based on direct FCE for a sector in a specific geographical 
     scope and for a specific year.
@@ -20,11 +20,13 @@ def get_direct_FCE_allocation_factor(geographical_scope, sector, year):
         geographical_scope: str
         sector: str
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         af_direct_fce: Allocation factor based on direct FCE
     """    
-    filtered_df = get_all_allocation_factor(geographical_scope, sector, year)
+    filtered_df = get_all_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=exiobase_storage_path)
     if filtered_df is None or filtered_df.empty:
         return None
     
@@ -42,7 +44,7 @@ def get_direct_FCE_allocation_factor(geographical_scope, sector, year):
     return None
 
 
-def get_total_FCE_allocation_factor(geographical_scope, sector, year):
+def get_total_FCE_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=None):
     """
     Get allocation factors based on total FCE for a sector in a specific geographical 
     scope and for a specific year.
@@ -51,11 +53,13 @@ def get_total_FCE_allocation_factor(geographical_scope, sector, year):
         geographical_scope: str
         sector: str
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         af_total_fce: Allocation factor based on total FCE
     """    
-    filtered_df = get_all_allocation_factor(geographical_scope, sector, year)
+    filtered_df = get_all_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=exiobase_storage_path)
     if filtered_df is None or filtered_df.empty:
         return None
     
@@ -73,7 +77,7 @@ def get_total_FCE_allocation_factor(geographical_scope, sector, year):
     return None
 
 
-def get_direct_GVA_allocation_factor(geographical_scope, sector, year):
+def get_direct_GVA_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=None):
     """
     Get allocation factors based on direct GVA for a sector in a specific geographical 
     scope and for a specific year.
@@ -82,11 +86,13 @@ def get_direct_GVA_allocation_factor(geographical_scope, sector, year):
         geographical_scope: str
         sector: str
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         af_direct_gva: Allocation factor based on direct GVA
     """    
-    filtered_df = get_all_allocation_factor(geographical_scope, sector, year)
+    filtered_df = get_all_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=exiobase_storage_path)
     if filtered_df is None or filtered_df.empty:
         return None
     
@@ -104,7 +110,7 @@ def get_direct_GVA_allocation_factor(geographical_scope, sector, year):
     return None
 
 
-def get_total_GVA_allocation_factor(geographical_scope, sector, year):
+def get_total_GVA_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=None):
     """
     Get allocation factors based on total GVA for a sector in a specific geographical 
     scope and for a specific year.
@@ -113,11 +119,13 @@ def get_total_GVA_allocation_factor(geographical_scope, sector, year):
         geographical_scope: str
         sector: str
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         ag_total_gva: Allocation factor based on total GVA
     """    
-    filtered_df = get_all_allocation_factor(geographical_scope, sector, year)
+    filtered_df = get_all_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=exiobase_storage_path)
     if filtered_df is None or filtered_df.empty:
         return None
     
@@ -134,25 +142,30 @@ def get_total_GVA_allocation_factor(geographical_scope, sector, year):
     print(f"Column for total GVA not found. Available columns: {filtered_df.columns.tolist()}")
     return None
 
-def download_exiobase_data(year):
+def download_exiobase_data(year, exiobase_storage_path=None):
     """
     Download exiobase industry-to-industry database for given year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         exio_downloadlog: Download-Log
 
     """ 
-    exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    if exiobase_storage_path is None:
+        exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    else:
+        exio_storage_folder = Path(exiobase_storage_path)
     exio_storage_folder.mkdir(parents=True, exist_ok=True)
     exio_downloadlog = p.download_exiobase3(
         storage_folder=exio_storage_folder, system="ixi", years=[year]
     )
     return exio_downloadlog 
 
-def load_matrices(year, return_L=True, return_Y=True):
+def load_matrices(year, return_L=True, return_Y=True, exiobase_storage_path=None):
     """
     Load Y matrix and calculate L matrix from exiobase.
 
@@ -160,13 +173,18 @@ def load_matrices(year, return_L=True, return_Y=True):
         year: int
         return_L: boolean
         return_Y: boolean
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         results: L and/or Y matrix
 
     """ 
 
-    exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    if exiobase_storage_path is None:
+        exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    else:
+        exio_storage_folder = Path(exiobase_storage_path)
     exio_storage_folder.mkdir(parents=True, exist_ok=True)
     pattern = str(exio_storage_folder / f"IOT_{year}_*.zip")
     matching_files = glob.glob(pattern)
@@ -174,7 +192,7 @@ def load_matrices(year, return_L=True, return_Y=True):
     if matching_files:
         exio_file_path = matching_files[0]
     else:
-        download_exiobase_data(year)
+        download_exiobase_data(year, exiobase_storage_path)
         matching_files = glob.glob(pattern)
         if matching_files:
             exio_file_path = matching_files[0]
@@ -201,18 +219,20 @@ def load_matrices(year, return_L=True, return_Y=True):
         results.append(Y)
     return results if len(results) > 1 else results[0]
 
-def prepare_L_matrix(year):
+def prepare_L_matrix(year, exiobase_storage_path=None):
     """
     Prepare L matrix by removing multi-index.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         L_sorted: datatframe
 
     """ 
-    L = load_matrices(year, return_Y=False)
+    L = load_matrices(year, return_Y=False, exiobase_storage_path=exiobase_storage_path)
 
     # Prepare Leontief-matrix for further calculations
     L_c = copy.deepcopy(L)
@@ -239,7 +259,7 @@ def get_index(year):
 
     return save_index
 
-def load_satellites(year, return_F=True, return_x=True, return_z = True):
+def load_satellites(year, return_F=True, return_x=True, return_z = True, exiobase_storage_path=None):
     """
     Load data from satellite accounts.
 
@@ -248,13 +268,18 @@ def load_satellites(year, return_F=True, return_x=True, return_z = True):
         return_F: boolean
         return_x: boolean
         return_z: boolean
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         results: F, z, x
 
     """ 
 
-    exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    if exiobase_storage_path is None:
+        exio_storage_folder = Path.home() / ".pbaesa_data" / "exiobase"
+    else:
+        exio_storage_folder = Path(exiobase_storage_path)
     exio_storage_folder.mkdir(parents=True, exist_ok=True)
     pattern = str(exio_storage_folder / f"IOT_{year}_*.zip")
     matching_files = glob.glob(pattern)
@@ -262,7 +287,7 @@ def load_satellites(year, return_F=True, return_x=True, return_z = True):
     if matching_files:
         exio_file_path = matching_files[0]
     else:
-        download_exiobase_data(year)
+        download_exiobase_data(year, exiobase_storage_path)
         matching_files = glob.glob(pattern)
         if matching_files:
             exio_file_path = matching_files[0]
@@ -286,7 +311,7 @@ def load_satellites(year, return_F=True, return_x=True, return_z = True):
         results.append(z_satellite)
     return results if len(results) > 1 else results[0]
 
-def define_scope(year, return_what='all'):
+def define_scope(year, return_what='all', exiobase_storage_path=None):
     """
     Define geographical scope and sector information for a given year.
 
@@ -300,8 +325,10 @@ def define_scope(year, return_what='all'):
             - 'num_geo': returns only the number of geographical regions
             - 'num_sectors': returns only the number of sectors
             - 'geo': returns only the list of geographical abbreviations
+    exiobase_storage_path: str or Path, optional
+        Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
     """
-    L = load_matrices(year, return_Y=False)
+    L = load_matrices(year, return_Y=False, exiobase_storage_path=exiobase_storage_path)
 
     # Define abbreviations used in Exiobase for all geographical scopes
     geo = [
@@ -327,21 +354,23 @@ def define_scope(year, return_what='all'):
         raise ValueError(f"Invalid return_what value: {return_what}. Choose from 'all', 'num_geo', 'num_sectors', 'geo'.")
     
 
-def calculate_FR_matrix(year):
+def calculate_FR_matrix(year, exiobase_storage_path=None):
     """
     Calculate FR matrix.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         FR_matrix: dataframe
 
     """ 
     
-    Y = load_matrices(year, return_L=False)
+    Y = load_matrices(year, return_L=False, exiobase_storage_path=exiobase_storage_path)
 
-    num_geo, num_sectors, geo = define_scope(year, return_what="all")
+    num_geo, num_sectors, geo = define_scope(year, return_what="all", exiobase_storage_path=exiobase_storage_path)
 
     
     #### Calculation of Equation 1 ####
@@ -459,19 +488,21 @@ def calculate_population_weights():
 
     return sPOPr
 
-def calculate_direct_FCE_allocation_factor(year):
+def calculate_direct_FCE_allocation_factor(year, exiobase_storage_path=None):
     """
     Calculate allocation factors based on direct FCE for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         direct_FCE_pop_df: A dataframe including the allocation factors based on direct FCE for a specified year.
 
     """   
     save_index = get_index(year)
-    FR_matrix = calculate_FR_matrix(year)
+    FR_matrix = calculate_FR_matrix(year, exiobase_storage_path=exiobase_storage_path)
     sPOPr = calculate_population_weights()
     direct_FCE_pop = (FR_matrix * sPOPr).sum(axis=1)
     direct_FCE_pop_df = pd.DataFrame(direct_FCE_pop, columns=["direct_FCE"])
@@ -479,12 +510,14 @@ def calculate_direct_FCE_allocation_factor(year):
     
     return direct_FCE_pop_df
 
-def calculate_total_FCE_allocation_factor(year):
+def calculate_total_FCE_allocation_factor(year, exiobase_storage_path=None):
     """
     Calculate allocation factors based on total FCE for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         total_FCE_df: A dataframe including the allocation factors based on total FCE for a specified year.
@@ -492,9 +525,9 @@ def calculate_total_FCE_allocation_factor(year):
     """ 
     save_index = get_index(year)
     
-    FR_matrix = calculate_FR_matrix(year)
-    L = load_matrices(year, return_Y=False)
-    num_geo, num_sectors, geo = define_scope(year)
+    FR_matrix = calculate_FR_matrix(year, exiobase_storage_path=exiobase_storage_path)
+    L = load_matrices(year, return_Y=False, exiobase_storage_path=exiobase_storage_path)
+    num_geo, num_sectors, geo = define_scope(year, exiobase_storage_path=exiobase_storage_path)
     sPOPr = calculate_population_weights()
 
     #### Calculation of Equation 3 ####
@@ -551,18 +584,20 @@ def calculate_total_FCE_allocation_factor(year):
 
     return total_FCE_df
 
-def calculate_GVA_per_sector(year):
+def calculate_GVA_per_sector(year, exiobase_storage_path=None):
     """
     Calculate GVA per sector for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         V_df: A dataframe including the GVA per sector for a specific year.
 
     """ 
-    value_added = load_satellites(year, return_x = False, return_z=False)
+    value_added = load_satellites(year, return_x = False, return_z=False, exiobase_storage_path=exiobase_storage_path)
 
   
 
@@ -591,18 +626,20 @@ def calculate_GVA_per_sector(year):
 
     return V_df
 
-def calculate_direct_GVA_per_sector(year):
+def calculate_direct_GVA_per_sector(year, exiobase_storage_path=None):
     """
     Calculate direct GVA per sector for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         GVA_df_geo: A dataframe including the direct GVA per sector for a specific year.
 
     """ 
-    value_added = load_satellites(year, return_x = False, return_z=False)
+    value_added = load_satellites(year, return_x = False, return_z=False, exiobase_storage_path=exiobase_storage_path)
 
     # Step 1: Extract value-added satellite data from Exiobase
     value_added.columns = ['_'.join(col) for col in value_added.columns]
@@ -624,43 +661,47 @@ def calculate_direct_GVA_per_sector(year):
 
     return GVA_df_geo
 
-def calculate_GVA_per_geographical_scope(year):
+def calculate_GVA_per_geographical_scope(year, exiobase_storage_path=None):
     """
     Calculate GVA per sector in geographical scope for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         full_GVA_per_geo: A dataframe including the GVA per sector in geographical scope for a specific year.
 
     """ 
-    GVA_df_geo = calculate_direct_GVA_per_sector(year)
+    GVA_df_geo = calculate_direct_GVA_per_sector(year, exiobase_storage_path=exiobase_storage_path)
 
     full_GVA_per_geo = GVA_df_geo.groupby('geo_scope')[0].sum()
 
     return full_GVA_per_geo
 
-def calculate_total_GVA_per_sector(year):
+def calculate_total_GVA_per_sector(year, exiobase_storage_path=None):
     """
     Calculate total GVA per sector in geographical scope for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         total_GVA_j: A dataframe including the total GVA per sector in geographical scope for a specific year.
 
     """ 
 
-    V_df = calculate_GVA_per_sector(year)
+    V_df = calculate_GVA_per_sector(year, exiobase_storage_path=exiobase_storage_path)
     V = V_df.to_numpy()
-    L_sorted = prepare_L_matrix(year)
+    L_sorted = prepare_L_matrix(year, exiobase_storage_path=exiobase_storage_path)
     save_index = get_index(year)
     #### Calculation of type I GVA multiplier ####
 
     # Step 1: Extract total output from Exiobase
-    x_df = load_satellites(year, return_F = False, return_z=False)
+    x_df = load_satellites(year, return_F = False, return_z=False, exiobase_storage_path=exiobase_storage_path)
     x_df = x_df.transpose()
     x_df.columns = ['_'.join(col) for col in x_df.columns]
     x_df = x_df.transpose().sort_index()
@@ -700,12 +741,14 @@ def calculate_total_GVA_per_sector(year):
 
     return total_GVA_j
 
-def add_regional_resolution_to_total_GVA_of_sector(year):
+def add_regional_resolution_to_total_GVA_of_sector(year, exiobase_storage_path=None):
     """
     Add regional resolution to total GVA per sector in geographical scope for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         total_GVA_per_geo_scope: dataframe
@@ -713,12 +756,12 @@ def add_regional_resolution_to_total_GVA_of_sector(year):
     """ 
     #### Compute total GVA of each sector in each geographical scope with regional resolution ####
 
-    V_df = calculate_GVA_per_sector(year)
+    V_df = calculate_GVA_per_sector(year, exiobase_storage_path=exiobase_storage_path)
 
-    total_GVA_j = calculate_total_GVA_per_sector(year)
+    total_GVA_j = calculate_total_GVA_per_sector(year, exiobase_storage_path=exiobase_storage_path)
 
     # Step 1: Extract inter-sectoral inputs from Exiobase 
-    Input = load_satellites(year, return_F = False, return_x=False)
+    Input = load_satellites(year, return_F = False, return_x=False, exiobase_storage_path=exiobase_storage_path)
     Input.columns = ['_'.join(col) for col in Input.columns]
     Input.index = ['_'.join(idx) for idx in Input.index]
 
@@ -756,12 +799,14 @@ def add_regional_resolution_to_total_GVA_of_sector(year):
 
     return total_GVA_per_geo_scope
 
-def calculate_total_GVA_allocation_factor(year):
+def calculate_total_GVA_allocation_factor(year, exiobase_storage_path=None):
     """
     Calculate allocation factors based on total GVA for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         total_GVA_pop_df: A dataframe including the allocation factors based on total GVA for a specified year.
@@ -769,8 +814,8 @@ def calculate_total_GVA_allocation_factor(year):
     """ 
 
     #### Calculate allocation factors based on total GVA ####
-    full_GVA_per_geo = calculate_GVA_per_geographical_scope(year)
-    total_GVA_per_geo_scope = add_regional_resolution_to_total_GVA_of_sector(year)
+    full_GVA_per_geo = calculate_GVA_per_geographical_scope(year, exiobase_storage_path=exiobase_storage_path)
+    total_GVA_per_geo_scope = add_regional_resolution_to_total_GVA_of_sector(year, exiobase_storage_path=exiobase_storage_path)
     save_index = get_index(year)
     sPOPr_dict = get_population_weights()
 
@@ -784,19 +829,21 @@ def calculate_total_GVA_allocation_factor(year):
 
     return total_GVA_pop_df
     
-def calculate_direct_GVA_allocation_factor(year):
+def calculate_direct_GVA_allocation_factor(year, exiobase_storage_path=None):
     """
     Calculate allocation factors based on direct GVA for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         direct_GVA_pop_df: A dataframe including the allocation factors based on direct GVA for a specified year.
 
     """ 
-    GVA_df_geo = calculate_direct_GVA_per_sector(year)
-    full_GVA_per_geo = calculate_GVA_per_geographical_scope(year)
+    GVA_df_geo = calculate_direct_GVA_per_sector(year, exiobase_storage_path=exiobase_storage_path)
+    full_GVA_per_geo = calculate_GVA_per_geographical_scope(year, exiobase_storage_path=exiobase_storage_path)
     save_index = get_index(year)
     sPOPr_dict = get_population_weights()
     sPOPr_series = pd.Series(sPOPr_dict).sort_index()
@@ -820,21 +867,23 @@ def calculate_direct_GVA_allocation_factor(year):
 
     return direct_GVA_pop_df 
 
-def calculate_all_allocation_factors(year):
+def calculate_all_allocation_factors(year, exiobase_storage_path=None):
     """
     Calculate all allocation factors based on direct,total FCE and direct, total GVA for a specific year.
 
     Parameters:
         year: int
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         aSoSOS_j_df: A dataframe including the allocation factors based on direct,total FCE and direct, total GVA for a specific year.
 
     """ 
-    direct_FCE_df = calculate_direct_FCE_allocation_factor(year)
-    indirect_FCE_df = calculate_total_FCE_allocation_factor(year)
-    total_GVA_df = calculate_total_GVA_allocation_factor(year)
-    direct_GVA_df = calculate_direct_GVA_allocation_factor(year)
+    direct_FCE_df = calculate_direct_FCE_allocation_factor(year, exiobase_storage_path=exiobase_storage_path)
+    indirect_FCE_df = calculate_total_FCE_allocation_factor(year, exiobase_storage_path=exiobase_storage_path)
+    total_GVA_df = calculate_total_GVA_allocation_factor(year, exiobase_storage_path=exiobase_storage_path)
+    direct_GVA_df = calculate_direct_GVA_allocation_factor(year, exiobase_storage_path=exiobase_storage_path)
 
     aSoSOS_j_df = pd.DataFrame()
     aSoSOS_j_df["Allocation factor calculated via total final consumption expenditure"] = indirect_FCE_df["Allocation factor calculated via total final consumption expenditure"]
@@ -847,7 +896,7 @@ def calculate_all_allocation_factors(year):
 
     return aSoSOS_j_df   
 
-def export_all_allocation_factors(year):
+def export_all_allocation_factors(year, exiobase_storage_path=None):
     """
     Calculate and export all allocation factors for a given year.
     
@@ -860,12 +909,14 @@ def export_all_allocation_factors(year):
     
     Parameters:
         year: int - The year for which to calculate allocation factors
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
         
     Returns:
         Excel-File with Allocation Factors
         
     """
-    aSoSOS_j_df = calculate_all_allocation_factors(year)
+    aSoSOS_j_df = calculate_all_allocation_factors(year, exiobase_storage_path=exiobase_storage_path)
 
     # Write to Excel-File that includes the allocation factors
     aSoSOS_j_df['Country (c.f. ISO 3166-1 alpha-2) & Rest of World regions'] = aSoSOS_j_df.index.str.split('_').str[0]
@@ -874,7 +925,7 @@ def export_all_allocation_factors(year):
     filename = f"Allocation Factors_{year}.xlsx"
     aSoSOS_j_df.to_excel(filename)
 
-def get_all_allocation_factor(geographical_scope, sector, year):
+def get_all_allocation_factor(geographical_scope, sector, year, exiobase_storage_path=None):
     """
     Get all allocation factors for a sector in a specific geographical scope and for a specific year.
     
@@ -885,6 +936,8 @@ def get_all_allocation_factor(geographical_scope, sector, year):
         geographical_scope: str - ISO 3166-1 alpha-2 country code or Rest of World region
         sector: str - Sector name according to EU's NACE Rev.1 classification
         year: int - Year for which to retrieve allocation factors
+        exiobase_storage_path: str or Path, optional
+            Custom path for storing exiobase data. If None, defaults to ~/.pbaesa_data/exiobase
 
     Returns:
         filtered_df: A pandas DataFrame with allocation factors for the specified sector 
@@ -898,7 +951,7 @@ def get_all_allocation_factor(geographical_scope, sector, year):
         print(f"Allocation factors file for year {year} not found.")
         print("Attempting to generate allocation factors...")
         try:
-            export_all_allocation_factors(year)
+            export_all_allocation_factors(year, exiobase_storage_path=exiobase_storage_path)
             # Re-check for the file after generation
             matching_file = glob.glob(pattern)
             if not matching_file:
