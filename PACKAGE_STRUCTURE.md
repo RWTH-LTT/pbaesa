@@ -1,6 +1,6 @@
 # Package Structure
 
-This document describes the modular structure of the pb-aesa package, which was created from the functionality in `package.ipynb`.
+This document describes the modular structure of the pbaesa package, which was created from the functionality in `package.ipynb`.
 
 ## Module Overview
 
@@ -78,15 +78,15 @@ The modular structure follows these principles:
 All main functions are accessible directly from the package:
 
 ```python
-import pb_aesa
+import pbaesa
 
 # Access functions
-pb_aesa.implement_lcia_methods(bio)
-exploit = pb_aesa.calculate_exploitation_of_SOS(mlca.scores)
-pb_aesa.plot_exploitation_of_SOS(exploit)
+pbaesa.implement_lcia_methods(bio)
+exploit = pbaesa.calculate_exploitation_of_SOS(mlca.scores)
+pbaesa.plot_exploitation_of_SOS(exploit)
 
 # Access constants
-thresholds = pb_aesa.SAFE_OPERATING_SPACE
+thresholds = pbaesa.SAFE_OPERATING_SPACE
 ```
 
 For detailed usage examples, see:
@@ -99,20 +99,20 @@ If you were using the notebook directly, here's how to migrate:
 
 | Notebook Function | Module Location | Import |
 |------------------|-----------------|--------|
-| `create_normal_methods()` | `methods.py` | `from pb_aesa import create_normal_methods` |
-| `create_n_cycle_method()` | `methods.py` | `from pb_aesa import create_n_cycle_method` |
-| `create_pbaesa_methods()` | `methods.py` (renamed) | `from pb_aesa import implement_lcia_methods` |
-| `create_n_supply_flow()` | `nitrogen.py` | `from pb_aesa import create_n_supply_flow` |
-| `add_n_supply_flow()` | `nitrogen.py` | `from pb_aesa import add_n_supply_flow` |
-| `calculate_exploitation_of_SOS()` | `analysis.py` | `from pb_aesa import calculate_exploitation_of_SOS` |
-| `plot_exploitation_of_SOS()` | `visualization.py` | `from pb_aesa import plot_exploitation_of_SOS` |
-| `get_*_allocation_factor()` | `allocation.py` | `from pb_aesa import get_*_allocation_factor` |
-| `*_exiobase_*()` | `exiobase.py` | `from pb_aesa import *_exiobase_*` |
+| `create_normal_methods()` | `methods.py` | `from pbaesa import create_normal_methods` |
+| `create_n_cycle_method()` | `methods.py` | `from pbaesa import create_n_cycle_method` |
+| `create_pbaesa_methods()` | `methods.py` (renamed) | `from pbaesa import implement_lcia_methods` |
+| `create_n_supply_flow()` | `nitrogen.py` | `from pbaesa import create_n_supply_flow` |
+| `add_n_supply_flow()` | `nitrogen.py` | `from pbaesa import add_n_supply_flow` |
+| `calculate_exploitation_of_SOS()` | `analysis.py` | `from pbaesa import calculate_exploitation_of_SOS` |
+| `plot_exploitation_of_SOS()` | `visualization.py` | `from pbaesa import plot_exploitation_of_SOS` |
+| `get_*_allocation_factor()` | `allocation.py` | `from pbaesa import get_*_allocation_factor` |
+| `*_exiobase_*()` | `exiobase.py` | `from pbaesa import *_exiobase_*` |
 
 ## File Structure
 
 ```
-pb-aesa/
+pbaesa/
 ├── __init__.py           # Package initialization and API exposure
 ├── constants.py          # Reference values and constants
 ├── methods.py            # LCIA method creation

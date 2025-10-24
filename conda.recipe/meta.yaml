@@ -2,14 +2,14 @@
 # https://docs.conda.io/projects/conda-build/en/latest/resources/define-metadata.html#loading-data-from-other-files
 # Original documentation implies that the __init__.py only has one line with __version__
 ---
-{% set version_match = load_file_regex(load_file="pb-aesa/__init__.py", 
+{% set version_match = load_file_regex(load_file="pbaesa/__init__.py", 
 regex_pattern='(?:.*)__version__ = "(.+)"') %}
 
 {% set version = version_match[1] %}
 
 
 package:
-        name: pb-aesa
+        name: pbaesa
         version: {{ version }}
 
 source:
@@ -23,7 +23,7 @@ requirements:
                 - python >=3.9
 
 about:
-        home: https://github.com/RWTH-LTT/pb-aesa
+        home: https://github.com/RWTH-LTT/pbaesa
         license: BSD-3-Clause
         license_file: LICENSE
 

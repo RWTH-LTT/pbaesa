@@ -1,5 +1,5 @@
 """
-pb-aesa: Planetary-boundary-based absolute environmental sustainability assessment
+pbaesa: Planetary-boundary-based absolute environmental sustainability assessment
 
 This package provides tools for implementing and using planetary boundary-based
 LCIA methods in Brightway LCA framework.

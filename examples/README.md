@@ -1,6 +1,6 @@
 # Examples
 
-This directory contains example scripts and notebooks demonstrating how to use the pb-aesa package.
+This directory contains example scripts and notebooks demonstrating how to use the pbaesa package.
 
 ## basic_usage.py
 
@@ -18,7 +18,7 @@ python basic_usage.py
 ## lcia_example.ipynb
 
 Interactive Jupyter notebook with a comprehensive tutorial:
-- Installing pb-aesa LCIA methods to Brightway
+- Installing pbaesa LCIA methods to Brightway
 - Running single and multi-LCA analyses
 - Displaying and interpreting LCIA results
 - Calculating exploitation of Safe Operating Space
@@ -34,7 +34,7 @@ jupyter notebook lcia_example.ipynb
 
 To run these examples, you need:
 1. A Brightway25 project with ecoinvent data
-2. The pb-aesa package installed
+2. The pbaesa package installed
 3. Required dependencies (bw2data, bw2calc, pandas, matplotlib, etc.)
 4. For the notebook: Jupyter notebook or JupyterLab
 

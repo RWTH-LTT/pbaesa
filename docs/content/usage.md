@@ -2,7 +2,7 @@
 
 ## Overview
 
-The `pb-aesa` package provides tools for planetary-boundary-based absolute environmental sustainability assessment. It includes modules for:
+The `pbaesa` package provides tools for planetary-boundary-based absolute environmental sustainability assessment. It includes modules for:
 
 - Creating LCIA methods for planetary boundaries
 - Calculating exploitation of Safe Operating Space (SOS)
@@ -18,7 +18,7 @@ First, initialize your Brightway25 project and create the planetary boundary LCI
 
 ```python
 import bw2data as bd
-import pb_aesa
+import pbaesa
 
 # Set your Brightway25 project
 bd.projects.set_current('your_project_name')
@@ -27,7 +27,7 @@ bd.projects.set_current('your_project_name')
 bio = bd.Database("ecoinvent-3.10.1-biosphere")
 
 # Create all planetary boundary LCIA methods
-pb_aesa.implement_lcia_methods(bio)
+pbaesa.implement_lcia_methods(bio)
 ```
 
 This creates methods for:
@@ -78,10 +78,10 @@ mlca.lci()
 mlca.lcia()
 
 # Calculate exploitation of Safe Operating Space
-exploit = pb_aesa.calculate_exploitation_of_SOS(mlca.scores)
+exploit = pbaesa.calculate_exploitation_of_SOS(mlca.scores)
 
 # Visualize results
-pb_aesa.plot_exploitation_of_SOS(exploit)
+pbaesa.plot_exploitation_of_SOS(exploit)
 ```
 
 ### 3. Working with Nitrogen Cycle
@@ -90,11 +90,11 @@ For agricultural systems, add nitrogen supply flows:
 
 ```python
 # Create nitrogen supply flow
-n_flow = pb_aesa.create_n_supply_flow(bio)
+n_flow = pbaesa.create_n_supply_flow(bio)
 
 # Add to agricultural processes
 process_ids = [process.id for process in your_agricultural_processes]
-pb_aesa.add_n_supply_flow_to_foreground_system(bio, process_ids)
+pbaesa.add_n_supply_flow_to_foreground_system(bio, process_ids)
 ```
 
 ### 4. Working with Allocation Factors
@@ -103,17 +103,17 @@ Retrieve allocation factors for specific sectors and geographical scopes:
 
 ```python
 # Get all allocation factors
-factors = pb_aesa.get_all_allocation_factor(
+factors = pbaesa.get_all_allocation_factor(
     geographical_scope="DE",  # Germany
     sector="Cultivation of wheat",
     year=2022
 )
 
 # Or get specific allocation factors
-direct_fce = pb_aesa.get_direct_FCE_allocation_factor("DE", "Cultivation of wheat", 2022)
-total_fce = pb_aesa.get_total_FCE_allocation_factor("DE", "Cultivation of wheat", 2022)
-direct_gva = pb_aesa.get_direct_GVA_allocation_factor("DE", "Cultivation of wheat", 2022)
-total_gva = pb_aesa.get_total_GVA_allocation_factor("DE", "Cultivation of wheat", 2022)
+direct_fce = pbaesa.get_direct_FCE_allocation_factor("DE", "Cultivation of wheat", 2022)
+total_fce = pbaesa.get_total_FCE_allocation_factor("DE", "Cultivation of wheat", 2022)
+direct_gva = pbaesa.get_direct_GVA_allocation_factor("DE", "Cultivation of wheat", 2022)
+total_gva = pbaesa.get_total_GVA_allocation_factor("DE", "Cultivation of wheat", 2022)
 ```
 
 ### 5. Working with EXIOBASE Data
@@ -122,13 +122,13 @@ Download and process EXIOBASE data:
 
 ```python
 # Download EXIOBASE data for a specific year
-pb_aesa.download_exiobase_data(year=2022)
+pbaesa.download_exiobase_data(year=2022)
 
 # Load Leontief inverse and final demand matrices
-L, Y = pb_aesa.load_matrices(year=2022)
+L, Y = pbaesa.load_matrices(year=2022)
 
 # Calculate FR matrix (sector share of final consumption expenditure)
-FR_matrix = pb_aesa.calculate_FR_matrix(year=2022)
+FR_matrix = pbaesa.calculate_FR_matrix(year=2022)
 ```
 
 ## Constants and Reference Values
@@ -137,16 +137,16 @@ Access planetary boundary thresholds and other constants:
 
 ```python
 # Safe Operating Space thresholds
-thresholds = pb_aesa.SAFE_OPERATING_SPACE
+thresholds = pbaesa.SAFE_OPERATING_SPACE
 
 # Planetary boundary units
-units = pb_aesa.PLANETARY_BOUNDARY_UNITS
+units = pbaesa.PLANETARY_BOUNDARY_UNITS
 
 # Standard categories
-categories = pb_aesa.STANDARD_CATEGORIES
+categories = pbaesa.STANDARD_CATEGORIES
 
 # EXIOBASE geographical scopes
-geo_scopes = pb_aesa.EXIOBASE_GEO_SCOPES
+geo_scopes = pbaesa.EXIOBASE_GEO_SCOPES
 ```
 
 ## Module Structure
@@ -169,10 +169,10 @@ Create only specific methods:
 
 ```python
 # Create only standard methods (without nitrogen cycle)
-pb_aesa.create_normal_methods(bio)
+pbaesa.create_normal_methods(bio)
 
 # Create only nitrogen cycle method
-pb_aesa.create_n_cycle_method(bio, process_ids=agricultural_process_ids)
+pbaesa.create_n_cycle_method(bio, process_ids=agricultural_process_ids)
 ```
 
 ### Customizing Visualizations
@@ -183,7 +183,7 @@ The visualization functions use matplotlib, so you can customize plots:
 import matplotlib.pyplot as plt
 
 # Calculate exploitation
-exploit = pb_aesa.calculate_exploitation_of_SOS(mlca.scores)
+exploit = pbaesa.calculate_exploitation_of_SOS(mlca.scores)
 
 # Create custom plot
 labels = [key[0][1] for key in exploit.keys()]
