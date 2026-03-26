@@ -91,6 +91,19 @@ utils.plot_AESA(exploitations, allocation_factor_total_FCE, allocation_factor_to
 
 For a more detailed example, see the `examples/` directory.
 
+## 📚 Citation
+
+`pbaesa` implements the methodology presented in:
+
+**Allocation and characterisation factors for absolute environmental sustainability assessment**  
+Jan Marcus Hartmann, David Yang Shu, André Bardow, Niklas von der Assen  
+
+📄 https://www.researchsquare.com/article/rs-9223095/v1  
+🔗 https://doi.org/10.21203/rs.3.rs-9223095/v1
+
+- If you use `pbaesa` in academic work, please cite the paper.  
+- The paper also provides additional background and methodological details.
+
 ## 🤝 Contributing
 
 We welcome contributions! If you have suggestions or want to fix a bug, please:
