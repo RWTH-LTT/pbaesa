@@ -95,14 +95,25 @@ For a more detailed example, see the `examples/` directory.
 
 `pbaesa` implements the methodology presented in:
 
-**Allocation and characterisation factors for absolute environmental sustainability assessment**  
-Jan Marcus Hartmann, David Yang Shu, André Bardow, Niklas von der Assen  
+> **Hartmann, J. M., Shu, D. Y., Bardow, A., & von der Assen, N. (2026).**  
+> *Allocation and characterisation factors for absolute environmental sustainability assessment*.  
+> **Scientific Data, 13**, Article 970.  
+> https://doi.org/10.1038/s41597-026-07797-w
 
-📄 https://www.researchsquare.com/article/rs-9223095/v1  
-🔗 https://doi.org/10.21203/rs.3.rs-9223095/v1
+- If you use `pbaesa` in academic work, please cite this publication.
+- The paper provides the methodological background and describes the derivation and validation of the allocation and characterisation factors implemented in `pbaesa`.
 
-- If you use `pbaesa` in academic work, please cite the paper.  
-- The paper also provides additional background and methodological details.
+## 📦 Datasets
+
+`pbaesa` uses the following openly available datasets, which are automatically downloaded and processed where appropriate:
+
+- **Allocation Factors for Absolute Environmental Sustainability Assessment**  
+  Provides allocation factors for **163 economic sectors** across **44 countries** and **5 Rest-of-World regions** based on four economic allocation principles. These factors are used to derive sector-specific shares of the global safe operating space.  
+  https://zenodo.org/records/20523866
+
+- **Characterisation Factors for Planetary-Boundary-Based Absolute Environmental Sustainability Assessment**  
+  Provides characterisation factors for **2,684 elementary flows** in the standard and prospective **ecoinvent v3.10.1** databases, covering all global planetary boundary categories except novel entities. The dataset also includes the global safe operating space values used by `pbaesa`.  
+  https://zenodo.org/records/17457702
 
 ## 🤝 Contributing
 
